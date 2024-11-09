@@ -37,9 +37,32 @@ test("checkbox appears as unchecked when user clicks a second time", () => {
 });
 
 // Size select element
+test("size select element initially displays 'Small'", () => {
+  render(<App />);
+
+  const selectSize = screen.getByLabelText(/select size/i);
+
+  expect(selectSize).toHaveDisplayValue("Small");
+});
 
 // "Your Selection" text
+test("'Your Selection' message initially displays 'small cheese'", () => {
+  render(<App />);
 
+  expect(screen.getByText(/small cheese/i)).toBeInTheDocument();
+});
 // "Contact Info" text box
+test("'Contact Info' text box initially displays a placeholder value of 'email address'", () => {
+  render(<App />);
+
+  expect(screen.getByPlaceholderText(/email address/i)).toBeInTheDocument();
+});
 
 // Submit Order button
+test("clicking the Place Order button displays a thank you message", () => {
+  render(<App />);
+
+  userEvent.click(screen.getByRole("button", { name: /submit order/i }));
+
+  expect(screen.getByText(/thanks for your order!/i)).toBeInTheDocument();
+});
